@@ -83,12 +83,12 @@ const projects = [
           >
             {item.type === 'video' ? (
               <video 
-              src={`${import.meta.env.BASE_URL}${item.image}`} 
-              autoplay 
-              loop 
-              muted 
-              playsinline 
-              style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+                src={`${import.meta.env.BASE_URL}${item.image}`} 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
               ></video>
             ) : (
               <img 
