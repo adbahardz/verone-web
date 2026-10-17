@@ -90,13 +90,16 @@ const projects = [
             >
               {item.type === 'video' ? (
                 <video 
-                  src={imageUrl} 
                   autoplay 
                   loop 
                   muted 
                   playsinline 
+                  preload="auto"
                   style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
-                ></video>
+                >
+                  <source src={imageUrl} type="video/mp4" />
+                  Tu navegador no soporta la reproducción de video.
+                </video>
               ) : (
                 <img 
                   src={imageUrl} 
