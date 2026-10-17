@@ -4,7 +4,7 @@ const { titulo, categoria, year, imagen } = Astro.props;
 
 <a href="#" class="card">
   <div class="image-container">
-    <img src={imagen} alt={titulo} />
+    <img src={`${import.meta.env.BASE_URL}${imagen}`} alt={titulo} />
   </div>
   <div class="meta">
     <span>{titulo}</span>
