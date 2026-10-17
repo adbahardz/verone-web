@@ -5,7 +5,7 @@ const projects = [
     title: "Web Design & UX ",
     category: "Dj Cocoloco",
     type: "video",
-    image: "videos/coco_web_2.mp4",
+    image: "videos/coco.webm",
     link: "#",
     objectPosition: "0% 38%",
     scale: "1",
@@ -97,7 +97,7 @@ const projects = [
                   preload="auto"
                   style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
                 >
-                  <source src={imageUrl} type="video/mp4" />
+                  <source src={imageUrl} type="video/webm" />
                   Tu navegador no soporta la reproducción de video.
                 </video>
               ) : (
