@@ -51,7 +51,7 @@ const slides = [
             <source src={slide.videoUrl} type="video/mp4" />
           </video>
         ) : (
-          <img src={slide.url} alt={slide.title} class="slide-media" loading="eager" style={`object-position: ${slide.mediaPosition};`} />
+          <img src={`${import.meta.env.BASE_URL}${slide.url}`} alt={slide.title} class="slide-media" loading="eager" style={`object-position: ${slide.mediaPosition};`} />
         )}
         
         <div class="slide-content">
