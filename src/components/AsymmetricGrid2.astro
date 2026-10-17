@@ -24,7 +24,7 @@ const featuredProjects = [
     {featuredProjects.map((project) => (
       <a href={project.link} class={`project-card ${project.isLarge ? 'card-large' : 'card-small'}`}>
         <div class="image-wrapper">
-          <img src={project.image} alt={project.title} loading="lazy" />
+          <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.title} loading="lazy" />
         </div>
         <div class="project-info">
           <h3 class="project-title">{project.title}</h3>
