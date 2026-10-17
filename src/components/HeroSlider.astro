@@ -8,7 +8,7 @@ const slides = [
     mediaPosition: "center 70%",
     youtubeUrl: "https://www.youtube.com/watch?v=KxRzUpLeDXE",
     buttonText: "ver Video",
-    startTime: 0 
+    startTime: 11 
   },
   { 
     url: "images/IMG_8960.jpg", 
@@ -52,7 +52,7 @@ const slides = [
         <div class={`slide ${index === 0 ? 'is-active' : ''}`}>
           {slide.type === "video" ? (
             <video autoplay loop muted playsinline preload="auto" class="slide-media" data-start={slide.startTime || 0} style={`object-position: ${slide.mediaPosition};`}>
-              <source src={mediaUrl} type="video/mp4" />
+              <source src={mediaUrl} type="video/webm" />
             </video>
           ) : (
             <img src={mediaUrl} alt={slide.title} class="slide-media" loading="eager" style={`object-position: ${slide.mediaPosition};`} />
