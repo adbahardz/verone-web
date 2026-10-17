@@ -2,7 +2,7 @@
 const slides = [
   {  
     type: "video",
-    videoUrl: "/videos/nikkei.mp4",
+    videoUrl: "videos/nikkei.mp4",
     title: "Pikante Luzern",
     subtitle: "Nikkei Nights & Vídeo Comercial donde exploramos la comida Japonesa - Peruana",
     mediaPosition: "center 70%",
@@ -11,20 +11,20 @@ const slides = [
     startTime: 0 
   },
   { 
-    url: "/images/IMG_8960.jpg", 
+    url: "images/IMG_8960.jpg", 
     title: "Fotografía de Autor",
     subtitle: "Donde exploramos la Belleza y el Amor de Katty & Roman",
     mediaPosition: "center 35%"
   },
   { 
-    url: "/images/IMG_7577.JPG", 
+    url: "images/IMG_7577.JPG", 
     title: "Brand Film",
     subtitle: "Dirección Creativa & Vídeo",
     mediaPosition: "center 80%",
   },
   {  
     type: "video",
-    videoUrl: "/videos/CHILBI AEUGST.mp4",
+    videoUrl: "videos/CHILBI AEUGST.mp4",
     title: "Chilbi Aeugst",
     subtitle: "Nikkei Nights & Vídeo Comercial donde exploramos la comida Japonesa - Peruana",
     mediaPosition: "center 30%",
@@ -33,12 +33,11 @@ const slides = [
     startTime: 05 
   },
   { 
-    url: "/images/bene01.jpg", 
+    url: "images/bene01.jpg", 
     title: "Coffee Break",
     subtitle: "Fotografía Publicitaria & Producto",
     mediaPosition: "center 30%"
   },
-  
 ];
 ---
 
@@ -48,7 +47,6 @@ const slides = [
       <div class={`slide ${index === 0 ? 'is-active' : ''}`}>
         {slide.type === "video" ? (
           <video autoplay loop muted playsinline class="slide-media" data-start={slide.startTime || 0} style={`object-position: ${slide.mediaPosition};`}>
-            <!-- CORREGIDO: Uso de BASE_URL para los videos en GitHub Pages -->
             <source src={`${import.meta.env.BASE_URL}${slide.videoUrl}`} type="video/mp4" />
           </video>
         ) : (

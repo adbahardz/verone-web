@@ -1,20 +1,18 @@
 ---
-const { titulo, categoria, year, imagen } = Astro.props;
----
-
----
 const { imagen, titulo, year, categoria } = Astro.props;
-// Si `imagen` es "/images/foto.jpg", le anteponemos el BASE_URL:
-const imageUrl = `${import.meta.env.BASE_URL}${imagen}`;
+
+// Limpiamos la ruta para asegurar que no haya dobles barras ni falte ninguna
+const cleanImage = imagen ? imagen.replace(/^\//, '') : '';
+const imageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${cleanImage}`;
 ---
 
 <a href="#" class="card">
   <div class="image-container">
-    <img src={imageUrl} alt={titulo} />
+    <img src={imageUrl} alt={titulo} loading="lazy" />
   </div>
   <div class="meta">
     <span>{titulo}</span>
-    <span>{year}</span>
+    {year && <span>{year}</span>}
   </div>
   <div class="category">{categoria}</div>
 </a>

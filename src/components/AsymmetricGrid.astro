@@ -4,8 +4,7 @@ const featuredProjects = [
   {
     title: "El Ultimo Campanazo",
     subtitle: "Crónica visual de la noche de graduación en Bülach. El cierre de una etapa y el inicio de lo inexplorado.",
-    
-    image: "/images/_SS_00-463.jpg", // Reemplaza por tu ruta
+    image: "images/_SS_00-463.jpg", 
     link: "#",
     isLarge: false
   },
@@ -13,7 +12,7 @@ const featuredProjects = [
     title: "XV Primaveras",
     subtitle: "Retratos y momentos inolvidables en una velada llena de color y tradición.",
     tags: [],
-    image: "/images/yadira.jpg", // Reemplaza por tu ruta
+    image: "images/yadira.jpg", 
     link: "#",
     isLarge: true
   }
@@ -22,24 +21,29 @@ const featuredProjects = [
 
 <section class="asymmetric-section">
   <div class="asymmetric-grid">
-    {featuredProjects.map((project) => (
-      <a href={project.link} class={`project-card ${project.isLarge ? 'card-large' : 'card-small'}`}>
-        <div class="image-wrapper">
-          <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.title} loading="lazy" />
-        </div>
-        <div class="project-info">
-          <h3 class="project-title">{project.title}</h3>
-          {project.subtitle && <p class="project-subtitle">{project.subtitle}</p>}
-          {project.tags && project.tags.length > 0 && (
-            <div class="project-tags">
-              {project.tags.map(tag => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          )}
-        </div>
-      </a>
-    ))}
+    {featuredProjects.map((project) => {
+      const cleanImage = project.image ? project.image.replace(/^\//, '') : '';
+      const imageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${cleanImage}`;
+      
+      return (
+        <a href={project.link} class={`project-card ${project.isLarge ? 'card-large' : 'card-small'}`}>
+          <div class="image-wrapper">
+            <img src={imageUrl} alt={project.title} loading="lazy" />
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">{project.title}</h3>
+            {project.subtitle && <p class="project-subtitle">{project.subtitle}</p>}
+            {project.tags && project.tags.length > 0 && (
+              <div class="project-tags">
+                {project.tags.map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </a>
+      );
+    })}
   </div>
 </section>
 
