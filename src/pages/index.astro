@@ -1,11 +1,205 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSlider from '../components/HeroSlider.astro';
+import DesignProcess from '../components/DesignProcess.astro';
+import AsymmetricGrid from '../components/AsymmetricGrid.astro';
+import AsymmetricGrid2 from '../components/AsymmetricGrid2.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import AirforcePeru from '../components/AirforcePeru.astro';
+import ProjectCard2 from '../components/ProjectCard2.astro';
+import Footer from '../components/Footer.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const proyectos = [
+  {
+    titulo: "Chilbi",
+    categoria: "Diseño Web & Vídeo Oficial",
+    imagen: "/images/chilbi.png"
+  },
+  {
+    titulo: "IDP Manual - Gate Gourmet",
+    categoria: "Branding & Documentación Corporativa",
+    imagen: "/images/gate.png"
+  },
+  {
+    titulo: "Disposuite",
+    categoria: "Motion Design & Youtube Content",
+    imagen: "/images/Disposuite.png"
+  },
+  {
+    titulo: "Dj Miky",
+    categoria: "Flyer Design & Identidad Visual",
+    imagen: "/images/flyer_m.png"
+  },
+  {
+    titulo: "Boda Roman & Katty",
+    categoria: "Video de Boda & Fotografia Editorial",
+    imagen: "/images/katty.webp"
+  },
+  {
+    titulo: "Narrativa Visual",
+    categoria: "Flyer Design & Identidad Visual",
+    imagen: "/images/mockup_zen2.jpeg"
+  }
+];
+
+// Tus nuevos proyectos de fotografía (Confirmación y Cumpleaños Hindú)
+const proyectosNuevos = [
+  {
+    titulo: "NIKKEI",
+    categoria: "Pikante Luzern",
+    imagen: "/images/nikkei.png"
+  },
+  {
+    titulo: "Food Festival",
+    categoria: "Pikante Luzern",
+    imagen: "/images/food_festival.png"
+  },
+  {
+    titulo: "Aniversario de Bomberos",
+    categoria: "LGV Nº75",
+    imagen: "/images/PIN2016.jpg"
+  },
+];
+
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>verone studio</title>
+    <style>
+      html {
+        background-color: #050505; 
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #0d0d0d;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow-x: hidden;
+        box-shadow: none !important;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      /* Contenedor general estricto de 1440px para texto y secciones */
+      .page-wrapper {
+        width: 100%;
+        max-width: 1440px;
+        padding: 2rem;
+        box-sizing: border-box;
+        box-shadow: none !important;
+      }
+
+      /* Cuadrícula exacta de 3 columnas idéntica a tu captura */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      /* Estilos para el indicador de últimos proyectos */
+      .latest-projects-indicator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem 0 1.5rem 0;
+        text-align: center;
+        box-shadow: none !important;
+      }
+
+      .indicator-text {
+        font-family: "Plus Jakarta Sans", -apple-system, sans-serif;
+        font-size: 0.95rem;
+        color: #888888;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.4rem;
+      }
+
+      .indicator-arrow {
+        font-size: 1.1rem;
+        color: #666666;
+        line-height: 1;
+      }
+
+      /* Diseño responsivo para pantallas medianas y móviles */
+      @media (max-width: 1024px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .page-wrapper {
+          padding: 1.25rem;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header contenido a 1440px -->
+    <div class="page-wrapper">
+      <Header title="verone." subtitle="w" />
+    </div>
+
+    <!-- El HeroSlider vive fuera del padding para hacer el full-bleed -->
+    <HeroSlider />
+
+    <!-- DesignProcess ("El Mundo Verone") vive fuera del wrapper -->
+    <DesignProcess />
+
+    <!-- Indicador de Últimos Proyectos con flecha -->
+    <div class="latest-projects-indicator">
+      <span class="indicator-text">Últimos Proyectos</span>
+      <span class="indicator-arrow">↓</span>
+    </div>
+
+    <!-- El resto de la web contenido a 1440px -->
+    <div class="page-wrapper">
+      <AsymmetricGrid />
+
+      <main class="grid">
+        {proyectos.map((proyecto) => (
+          <ProjectCard 
+            titulo={proyecto.titulo}
+            categoria={proyecto.categoria}
+            year={proyecto.year}
+            imagen={proyecto.imagen}
+          />
+        ))}
+      </main>
+    </div>
+
+    <!-- AirforcePeru colocado fuera del wrapper para respetar el ancho completo -->
+    <AirforcePeru />
+    <AsymmetricGrid2 />
+    
+    <!-- Sección final con tus nuevas tarjetas (Confirmación y Cumpleaños Hindú) en formato de 3 columnas -->
+    <div class="page-wrapper">
+      <main class="grid" style="margin-top: 4rem;">
+        {proyectosNuevos.map((item) => (
+          <ProjectCard2 
+            titulo={item.titulo}
+            categoria={item.categoria}
+            year={item.year}
+            imagen={item.imagen}
+          />
+        ))}
+      </main>
+    </div>
+    <Footer />
+  </body>
+</html>

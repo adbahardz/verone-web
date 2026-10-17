@@ -1,0 +1,304 @@
+---
+const slides = [
+  {  
+    type: "video",
+    videoUrl: "/videos/nikkei.mp4",
+    title: "Pikante Luzern",
+    subtitle: "Nikkei Nights & Vídeo Comercial donde exploramos la comida Japonesa - Peruana",
+    mediaPosition: "center 70%",
+    youtubeUrl: "https://www.youtube.com/watch?v=KxRzUpLeDXE",
+    buttonText: "ver Video",
+    startTime: 0 // <--- Aquí empieza exactamente en el minuto 1:05 (65 segundos)
+  },
+  { 
+    url: "/images/IMG_8960.jpg", 
+    title: "Fotografía de Autor",
+    subtitle: "Donde exploramos la Belleza y el Amor de Katty & Roman",
+    mediaPosition: "center 35%"
+  },
+  { 
+    url: "/images/IMG_7577.JPG", 
+    title: "Brand Film",
+    subtitle: "Dirección Creativa & Vídeo",
+    mediaPosition: "center 80%",
+  },
+  {  
+    type: "video",
+    videoUrl: "/videos/CHILBI AEUGST.mp4",
+    title: "Chilbi Aeugst",
+    subtitle: "Nikkei Nights & Vídeo Comercial donde exploramos la comida Japonesa - Peruana",
+    mediaPosition: "center 30%",
+    youtubeUrl: "#",
+    buttonText: "ver Video",
+    startTime: 05 // <--- Aquí empieza exactamente en el minuto 1:05 (65 segundos)
+  },
+  { 
+    url: "/images/bene01.jpg", 
+    title: "Coffee Break",
+    subtitle: "Fotografía Publicitaria & Producto",
+    mediaPosition: "center 30%"
+  },
+  
+];
+---
+
+<section class="hero-slider">
+  <div class="slider-container">
+    {slides.map((slide, index) => (
+      <div class={`slide ${index === 0 ? 'is-active' : ''}`}>
+        {slide.type === "video" ? (
+          <video autoplay loop muted playsinline class="slide-media" data-start={slide.startTime || 0} style={`object-position: ${slide.mediaPosition};`}>
+            <source src={slide.videoUrl} type="video/mp4" />
+          </video>
+        ) : (
+          <img src={slide.url} alt={slide.title} class="slide-media" loading="eager" style={`object-position: ${slide.mediaPosition};`} />
+        )}
+        
+        <div class="slide-content">
+          <!-- Título y subtítulo fijos a la izquierda -->
+          <div class="slide-info">
+            <h2 class="slide-title">{slide.title}</h2>
+            <p class="slide-subtitle">{slide.subtitle}</p>
+          </div>
+
+          <!-- Contenedor independiente para subir el botón sin afectar el texto -->
+          {slide.youtubeUrl && (
+            <div class="slide-btn-wrapper">
+              <a href={slide.youtubeUrl} target="_blank" rel="noopener noreferrer" class="slide-capsule-btn">
+                <span class="btn-text">{slide.buttonText || "Mira video"}</span>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-slider {
+    position: relative;
+    width: 100%;
+    margin-top: 0rem;
+    margin-bottom: 3rem;
+    height: 700px;
+    max-height: 700px;
+    background-color: #000;
+    overflow: hidden;
+  }
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+  }
+
+  .slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+
+  .slide-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .slide-content {
+    position: absolute;
+    bottom: 4.5rem;
+    left: 3rem;
+    right: 3rem;
+    z-index: 3;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none; 
+  }
+
+  .slide-content > * {
+    pointer-events: auto;
+  }
+
+  .slide-info {
+    max-width: 60%;
+  }
+
+  .slide-title {
+    font-family: "Futura", "Futura PT", "Outfit", sans-serif;
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.9rem 0;
+    line-height: 1.1;
+  }
+
+  .slide-subtitle {
+    font-family: "Futura", "Futura PT", "Outfit", sans-serif;
+    font-size: 0.9rem;
+    color: #cccccc;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .slide-btn-wrapper {
+    display: flex;
+    align-items: flex-end;
+    transform: translateY(-0.5rem); 
+  }
+
+  .slide-capsule-btn {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0.9rem 2.2rem !important;
+    background-color: transparent !important; 
+    color: #ffffff !important;                
+    text-decoration: none !important;         
+    border: 1.5px solid #ffffff !important;   
+    border-radius: 50px !important;           
+    transition: transform 0.3s ease !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+  }
+
+  .slide-capsule-btn:hover {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    transform: translateY(-2px);
+  }
+
+  .slide-capsule-btn:hover .btn-text {
+    color: #ffffff !important;
+  }
+
+  .btn-text {
+    font-family: "Futura", "Futura PT", "Outfit", "Plus Jakarta Sans", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.2 !important;
+    color: #ffffff !important; 
+  }
+
+  @media (max-width: 1024px) {
+    .hero-slider {
+      width: 100%;
+      height: 500px;
+      max-height: 500px;
+    }
+  }
+
+  @media (min-width: 1726px) {
+    .hero-slider {
+      max-width: 1440px;
+      height: 700px; 
+      max-height: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 4px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-slider {
+      width: 100%;
+      height: 480px;
+      max-height: none;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 0;
+    }
+
+    .slide-content {
+      bottom: 2rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+
+    .slide-info {
+      max-width: 100%;
+    }
+
+    .slide-title {
+      font-size: 1.6rem;
+    }
+
+    .slide-subtitle {
+      font-size: 0.75rem;
+    }
+
+    .slide-btn-wrapper {
+      transform: translateY(0);
+    }
+
+    .slide-capsule-btn {
+      padding: 0.7rem 1.8rem !important;
+    }
+
+    .btn-text {
+      font-size: 0.9rem !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    if (slides.length <= 1) return;
+
+    let currentIndex = 0;
+    const slideDuration = 11000;
+
+    function playCurrentVideo() {
+      const activeSlide = slides[currentIndex];
+      const video = activeSlide.querySelector('video');
+      if (video) {
+        const startTime = parseFloat(video.getAttribute('data-start')) || 0;
+        video.currentTime = startTime;
+        video.play().catch(e => console.log("Autoplay evitado:", e));
+      }
+    }
+
+    playCurrentVideo();
+
+    function rotateSlides() {
+      slides[currentIndex].classList.remove('is-active');
+      const outgoingVideo = slides[currentIndex].querySelector('video');
+      if (outgoingVideo) outgoingVideo.pause();
+
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].classList.add('is-active');
+
+      playCurrentVideo();
+    }
+
+    setInterval(rotateSlides, slideDuration);
+  });
+</script>

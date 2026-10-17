@@ -1,0 +1,141 @@
+---
+// Datos de los dos proyectos
+const featuredProjects = [
+  {
+    title: "El Ultimo Campanazo",
+    subtitle: "Crónica visual de la noche de graduación en Bülach. El cierre de una etapa y el inicio de lo inexplorado.",
+    
+    image: "/images/_SS_00-463.jpg", // Reemplaza por tu ruta
+    link: "#",
+    isLarge: false
+  },
+  {
+    title: "XV Primaveras",
+    subtitle: "Retratos y momentos inolvidables en una velada llena de color y tradición.",
+    tags: [],
+    image: "/images/yadira.jpg", // Reemplaza por tu ruta
+    link: "#",
+    isLarge: true
+  }
+];
+---
+
+<section class="asymmetric-section">
+  <div class="asymmetric-grid">
+    {featuredProjects.map((project) => (
+      <a href={project.link} class={`project-card ${project.isLarge ? 'card-large' : 'card-small'}`}>
+        <div class="image-wrapper">
+          <img src={project.image} alt={project.title} loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">{project.title}</h3>
+          {project.subtitle && <p class="project-subtitle">{project.subtitle}</p>}
+          {project.tags && project.tags.length > 0 && (
+            <div class="project-tags">
+              {project.tags.map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .asymmetric-section {
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  /* Grid en escritorio: Columna izquierda más pequeña (1fr) y derecha más grande (2fr) */
+  .asymmetric-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Relación de aspecto 1:2 estilo Pentagram */
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .project-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: inherit;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover {
+    opacity: 0.88;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    background-color: #111;
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Metadatos y Tipografía */
+  .project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .project-title {
+    font-family: "Futura", "Futura PT", "Outfit", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .project-subtitle {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 90%;
+  }
+
+  /* Tags/Etiquetas minimalistas */
+  .project-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.75rem;
+    color: #888888;
+    background-color: rgba(255, 255, 255, 0.06);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* VERSIÓN RESPONSIVA (Móvil y Tablets pequeñas) */
+  @media (max-width: 868px) {
+    .asymmetric-grid {
+      grid-template-columns: 1fr; /* Pasa a 1 sola columna */
+      gap: 3rem;
+    }
+
+    .project-subtitle {
+      max-width: 100%;
+    }
+  }
+</style>

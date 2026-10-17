@@ -1,0 +1,334 @@
+---
+const { title = "Verone dsgn" } = Astro.props;
+
+const navItems = [
+  { label: "Projects", href: "#projects" },
+  { label: "Profile", href: "#profile" },
+  { label: "Updates", href: "#updates" },
+  { label: "Contact", href: "#contact" },
+];
+
+const socialLinks = [
+  { label: "Instagram", href: "https://instagram.com" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Tiktok", href: "https://vimeo.com" },
+];
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<header>
+  <div class="brand">
+    <a href="/" class="logo">{title}</a>
+  </div>
+
+  <div class="header-right">
+    <!-- Selector de idioma visible afuera en la versión MÓVIL -->
+    <div class="lang-switcher mobile-only">
+      <a href="#" class="lang-btn active">ES</a>
+      <span class="divider">/</span>
+      <a href="#" class="lang-btn">DE</a>
+    </div>
+
+    <!-- Botón Hamburguesa de 2 líneas (Solo visible en móvil) -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
+      <span class="line top-line"></span>
+      <span class="line bottom-line"></span>
+    </button>
+  </div>
+
+  <!-- Navegación -->
+  <nav id="nav-overlay" class="navigation">
+    <div class="menu-content">
+      <div class="main-links">
+        {navItems.map((item) => (
+          <a href={item.href} class="nav-link">{item.label}</a>
+        ))}
+        
+        <!-- Selector de idioma integrado al final del menú solo en ESCRITORIO -->
+        <div class="lang-switcher desktop-only">
+          <a href="#" class="lang-btn active">ES</a>
+          <span class="divider">/</span>
+          <a href="#" class="lang-btn">DE</a>
+        </div>
+      </div>
+
+      <div class="menu-footer">
+        <div class="social-links">
+          {socialLinks.map((social) => (
+            <a href={social.href} target="_blank" rel="noopener noreferrer" class="footer-link">{social.label}</a>
+          ))}
+        </div>
+        <div class="copyright">
+          © {new Date().getFullYear()} Verone Studio
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    z-index: 102;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 102;
+  }
+
+  /* Logo */
+  .logo {
+    font-family: "Futura", "Futura PT", "Futura Medium Italic", "Outfit", "Century Gothic", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: -0.035em;
+    color: #fff;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  /* Botón Hamburguesa (Oculto en Escritorio) */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .line {
+    width: 100%;
+    height: 1.5px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-toggle.active .top-line {
+    transform: translateY(5.25px) rotate(45deg);
+  }
+
+  .menu-toggle.active .bottom-line {
+    transform: translateY(-5.25px) rotate(-45deg);
+  }
+
+  /* --- CONTROL DE VISIBILIDAD DE LOS SELECTORES --- */
+  .mobile-only {
+    display: none; /* Oculto en escritorio */
+  }
+
+  .desktop-only {
+    display: inline-flex; /* Visible en escritorio */
+  }
+
+  /* --- MODO ESCRITORIO --- */
+  .navigation {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #fff;
+  }
+
+  .menu-footer {
+    display: none;
+  }
+
+  /* --- Selector de Idiomas en formato Botón Delineado (Outline) --- */
+  .lang-switcher {
+    align-items: center;
+    gap: 0.4rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    background-color: transparent;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .lang-switcher:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .lang-btn {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .lang-btn:hover,
+  .lang-btn.active {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .divider {
+    color: #444;
+  }
+
+  /* --- MODO MÓVIL (ESTILO PENTAGRAM) --- */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: flex;
+    }
+
+    /* Intercambiamos la visibilidad: el de afuera se muestra, el del menú se oculta */
+    .mobile-only {
+      display: inline-flex;
+      padding: 0.3rem 0.7rem; /* Ligeramente más compacto para la barra superior móvil */
+      font-size: 0.8rem;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 101;
+      padding: 10rem 2rem 2.5rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .navigation.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-content {
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .main-links {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-family: "Plus Jakarta Sans", sans-serif;  
+      font-size: 1.5rem;
+      color: #ffffff;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-transform: none;
+    }
+
+    .menu-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-link {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-family: "Futura", "Outfit", sans-serif;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: #fff;
+    }
+
+    .copyright {
+      color: #555;
+      font-size: 0.85rem;
+      font-family: "Futura", "Outfit", sans-serif;
+    }
+  }
+</style>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const navOverlay = document.getElementById('nav-overlay');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function toggleMenu() {
+    menuToggle?.classList.toggle('active');
+    navOverlay?.classList.toggle('active');
+    
+    if (navOverlay?.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuToggle?.addEventListener('click', toggleMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle?.classList.remove('active');
+      navOverlay?.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

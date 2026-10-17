@@ -1,23 +1,45 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Verone Dsgn</title>
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <div class="site-container">
+                <slot />
+            </div>
+        </div>
+    </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+    /* El html y body definen el fondo general que se verá a los lados en pantallas grandes */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #f4f4f4; /* Cambia a #ffffff si prefieres blanco puro a los costados */
+    }
+
+    /* Envoltorio exterior que asegura el centrado global */
+    .site-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* El contenedor real que bloquea el ancho a 1440px */
+    .site-container {
+        width: 100%;
+        max-width: 1440px;
+        background-color: #000000; /* Fondo de tu web (ajústalo si tu web es blanca o oscura) */
+        min-height: 100vh;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
 </style>

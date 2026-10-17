@@ -1,0 +1,264 @@
+---
+// 5 proyectos para el carrusel continuo (con soporte para video e imágenes)
+const projects = [
+  {
+    title: "Web Design & UX ",
+    category: "Dj Cocoloco",
+    type: "video",
+    image: "/videos/coco_web_2.mp4",
+    link: "#",
+    objectPosition: "0% 38%",
+    scale: "1",
+    cardWidth: "240px",
+    wrapperHeight: "390px"
+  },
+  {
+    title: "Brand Film & Production",
+    category: "Starbucks",
+    type: "video",
+    image: "/videos/DEAC4525.M4V",
+    link: "#",
+    objectPosition: "center",
+    scale: "1",
+    cardWidth: "200px",
+    wrapperHeight: "390px",
+    customClass: "starbucks-card"
+  },
+  {
+    title: "Portrait & Fashion Series",
+    category: "Commercial Photography",
+    image: "/images/studio-portrait-blue2.jpg",
+    link: "#",
+    objectPosition: "center",
+    scale: "1",
+    cardWidth: "250px",
+    wrapperHeight: "390px"
+  },
+  {
+    title: "Event & Cultural Stories",
+    category: "Nikkei Nights",
+    image: "/images/pikante_bola_roja.webp",
+    link: "#",
+    objectPosition: "center",
+    scale: "1",
+    cardWidth: "240px",
+    wrapperHeight: "390px"
+  },
+  {
+    title: "XV Primaveras",
+    category: "Editorial Collection",
+    image: "/images/yadira.jpg",
+    link: "#",
+    objectPosition: "35% 0%",
+    scale: "1.2",
+    cardWidth: "240px",
+    wrapperHeight: "390px"
+  }
+];
+---
+
+<!-- Importación de Plus Jakarta Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+
+<section class="process-section">
+  <div class="process-header">
+    <h2 class="process-title">El Mundo Verone</h2>
+    <p class="process-description">
+      Forjado entre la exigencia de la precisión suiza y una mirada con alma latina. Un espacio donde la fotografía comercial, la dirección de movimiento y el diseño digital se descomponen hasta encontrar su esencia más pura: impacto, elegancia y una presencia inconfundible en cada fotograma.
+    </p>
+  </div>
+
+  <!-- Carrusel Infinito -->
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <!-- Duplicamos el array para lograr el bucle infinito continuo -->
+      {[...projects, ...projects].map((item) => (
+        <a 
+          href={item.link} 
+          class={`project-card ${item.customClass || ''}`}
+          style={item.cardWidth ? `flex: 0 0 ${item.cardWidth}; width: ${item.cardWidth};` : ''}
+        >
+          <div 
+            class="image-wrapper"
+            style={item.wrapperHeight ? `height: ${item.wrapperHeight};` : ''}
+          >
+            {item.type === 'video' ? (
+              <video 
+                src={item.image} 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+              ></video>
+            ) : (
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                loading="lazy" 
+                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+              />
+            )}
+          </div>
+          <div class="project-meta">
+            <h3 class="project-title">{item.title}</h3>
+            <p class="project-category">{item.category}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Por defecto ocupa el ancho completo de lado a lado */
+  .process-section {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #111111 0%, #000000 100%);
+    padding: 4rem 3rem;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+
+  .process-header {
+    max-width: 680px;
+    margin-bottom: 3rem;
+  }
+
+  .process-title {
+    font-family: "Futura", "Futura PT", "Outfit", sans-serif;
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.2rem 0;
+    line-height: 1.1;
+  }
+
+  .process-description {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #a0a0a0;
+    font-weight: 300;
+    letter-spacing: 0.015em;
+    margin: 0;
+  }
+
+  /* Contenedor del carrusel */
+  .carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Pista que se desliza (Se eliminó el :hover para que no se pause nunca) */
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+  }
+
+  /* Tarjeta individual con tamaño por defecto */
+  .project-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex: 0 0 280px;
+    width: 280px;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover {
+    opacity: 0.85;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    background-color: #111;
+  }
+
+  .image-wrapper img,
+  .image-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .project-title {
+    font-family: "Futura", "Futura PT", "Outfit", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .project-category {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.85rem;
+    color: #666666;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* Animación continua sin cortes */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 0.75rem));
+    }
+  }
+
+  /* REGLA MAESTRA: A partir de 1726px se frena y se alinea a 1440px */
+  @media (min-width: 1726px) {
+    .process-section {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 4px;
+    }
+  }
+
+  /* CONTROL EXCLUSIVO PARA STARBUCKS A PARTIR DE 720px */
+  @media (min-width: 720px) {
+    .project-card.starbucks-card {
+      flex: 0 0 400px !important;
+      width: 450px !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .process-section {
+      padding: 3rem 1.5rem;
+      border-radius: 0;
+    }
+
+    .process-title {
+      font-size: 1.9rem;
+    }
+
+    .process-description {
+      font-size: 0.95rem;
+    }
+  }
+</style>
