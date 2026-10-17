@@ -74,40 +74,45 @@ const projects = [
   <div class="carousel-container">
     <div class="carousel-track">
       <!-- Duplicamos el array para lograr el bucle infinito continuo -->
-      {[...projects, ...projects].map((item) => (
-        <a 
-          href={item.link} 
-          class={`project-card ${item.customClass || ''}`}
-          style={item.cardWidth ? `flex: 0 0 ${item.cardWidth}; width: ${item.cardWidth};` : ''}
-        >
-          <div 
-            class="image-wrapper"
-            style={item.wrapperHeight ? `height: ${item.wrapperHeight};` : ''}
+      {[...projects, ...projects].map((item) => {
+        const cleanImage = item.image ? item.image.replace(/^\//, '') : '';
+        const imageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${cleanImage}`;
+
+        return (
+          <a 
+            href={item.link} 
+            class={`project-card ${item.customClass || ''}`}
+            style={item.cardWidth ? `flex: 0 0 ${item.cardWidth}; width: ${item.cardWidth};` : ''}
           >
-            {item.type === 'video' ? (
-              <video 
-                src={`${import.meta.env.BASE_URL}${item.image}`} 
-                autoplay 
-                loop 
-                muted 
-                playsinline 
-                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
-              ></video>
-            ) : (
-              <img 
-                src={`${import.meta.env.BASE_URL}${item.image}`} 
-                alt={item.title} 
-                loading="lazy" 
-                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
-              />
-            )}
-          </div>
-          <div class="project-meta">
-            <h3 class="project-title">{item.title}</h3>
-            <p class="project-category">{item.category}</p>
-          </div>
-        </a>
-      ))}
+            <div 
+              class="image-wrapper"
+              style={item.wrapperHeight ? `height: ${item.wrapperHeight};` : ''}
+            >
+              {item.type === 'video' ? (
+                <video 
+                  src={imageUrl} 
+                  autoplay 
+                  loop 
+                  muted 
+                  playsinline 
+                  style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+                ></video>
+              ) : (
+                <img 
+                  src={imageUrl} 
+                  alt={item.title} 
+                  loading="lazy" 
+                  style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+                />
+              )}
+            </div>
+            <div class="project-meta">
+              <h3 class="project-title">{item.title}</h3>
+              <p class="project-category">{item.category}</p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>
