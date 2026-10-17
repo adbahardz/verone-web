@@ -86,20 +86,20 @@ const projects = [
           >
             {item.type === 'video' ? (
               <video 
-              src={`${import.meta.env.BASE_URL}${item.image}`} 
-              autoplay 
-              loop 
-              muted 
-              playsinline 
-              style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+                src={`${import.meta.env.BASE_URL}${item.image}`} 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
               ></video>
             ) : (
-                <img 
-                  src={`${import.meta.env.BASE_URL}${item.image}`} 
-                   alt={item.title} 
-                   loading="lazy" 
-                  style={`object-position: ${item.objectPosition \vert{}\vert{} 'center'}; transform: scale(${item.scale || '1'});`}
-/>
+              <img 
+                src={`${import.meta.env.BASE_URL}${item.image}`} 
+                alt={item.title} 
+                loading="lazy" 
+                style={`object-position: ${item.objectPosition || 'center'}; transform: scale(${item.scale || '1'});`}
+              />
             )}
           </div>
           <div class="project-meta">
@@ -113,7 +113,6 @@ const projects = [
 </section>
 
 <style>
-  /* Por defecto ocupa el ancho completo de lado a lado */
   .process-section {
     width: 100%;
     margin-top: 1rem;
@@ -150,14 +149,12 @@ const projects = [
     margin: 0;
   }
 
-  /* Contenedor del carrusel */
   .carousel-container {
     width: 100%;
     overflow: hidden;
     position: relative;
   }
 
-  /* Pista que se desliza (Se eliminó el :hover para que no se pause nunca) */
   .carousel-track {
     display: flex;
     gap: 1.5rem;
@@ -165,7 +162,6 @@ const projects = [
     animation: marquee 25s linear infinite;
   }
 
-  /* Tarjeta individual con tamaño por defecto */
   .project-card {
     text-decoration: none;
     display: flex;
@@ -219,7 +215,6 @@ const projects = [
     margin: 0;
   }
 
-  /* Animación continua sin cortes */
   @keyframes marquee {
     0% {
       transform: translateX(0);
@@ -229,7 +224,6 @@ const projects = [
     }
   }
 
-  /* REGLA MAESTRA: A partir de 1726px se frena y se alinea a 1440px */
   @media (min-width: 1726px) {
     .process-section {
       max-width: 1440px;
@@ -239,7 +233,6 @@ const projects = [
     }
   }
 
-  /* CONTROL EXCLUSIVO PARA STARBUCKS A PARTIR DE 720px */
   @media (min-width: 720px) {
     .project-card.starbucks-card {
       flex: 0 0 400px !important;
