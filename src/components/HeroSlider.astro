@@ -30,7 +30,7 @@ const slides = [
     mediaPosition: "center 30%",
     youtubeUrl: "#",
     buttonText: "ver Video",
-    startTime: 00 
+    startTime: 0 
   },
   { 
     url: "images/bene01.jpg", 
@@ -43,34 +43,40 @@ const slides = [
 
 <section class="hero-slider">
   <div class="slider-container">
-    {slides.map((slide, index) => (
-      <div class={`slide ${index === 0 ? 'is-active' : ''}`}>
-        {slide.type === "video" ? (
-          <video autoplay loop muted playsinline class="slide-media" data-start={slide.startTime || 0} style={`object-position: ${slide.mediaPosition};`}>
-            <source src={`${import.meta.env.BASE_URL}${slide.videoUrl}`} type="video/mp4" />
-          </video>
-        ) : (
-          <img src={`${import.meta.env.BASE_URL}${slide.url}`} alt={slide.title} class="slide-media" loading="eager" style={`object-position: ${slide.mediaPosition};`} />
-        )}
-        
-        <div class="slide-content">
-          <!-- Título y subtítulo fijos a la izquierda -->
-          <div class="slide-info">
-            <h2 class="slide-title">{slide.title}</h2>
-            <p class="slide-subtitle">{slide.subtitle}</p>
-          </div>
+    {slides.map((slide, index) => {
+      const mediaPath = slide.type === "video" ? slide.videoUrl : slide.url;
+      const cleanMedia = mediaPath ? mediaPath.replace(/^\//, '') : '';
+      const mediaUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${cleanMedia}`;
 
-          <!-- Contenedor independiente para subir el botón sin afectar el texto -->
-          {slide.youtubeUrl && slide.youtubeUrl !== "#" && (
-            <div class="slide-btn-wrapper">
-              <a href={slide.youtubeUrl} target="_blank" rel="noopener noreferrer" class="slide-capsule-btn">
-                <span class="btn-text">{slide.buttonText || "Mira video"}</span>
-              </a>
-            </div>
+      return (
+        <div class={`slide ${index === 0 ? 'is-active' : ''}`}>
+          {slide.type === "video" ? (
+            <video autoplay loop muted playsinline preload="auto" class="slide-media" data-start={slide.startTime || 0} style={`object-position: ${slide.mediaPosition};`}>
+              <source src={mediaUrl} type="video/mp4" />
+            </video>
+          ) : (
+            <img src={mediaUrl} alt={slide.title} class="slide-media" loading="eager" style={`object-position: ${slide.mediaPosition};`} />
           )}
+          
+          <div class="slide-content">
+            <!-- Título y subtítulo fijos a la izquierda -->
+            <div class="slide-info">
+              <h2 class="slide-title">{slide.title}</h2>
+              <p class="slide-subtitle">{slide.subtitle}</p>
+            </div>
+
+            <!-- Contenedor independiente para subir el botón sin afectar el texto -->
+            {slide.youtubeUrl && slide.youtubeUrl !== "#" && (
+              <div class="slide-btn-wrapper">
+                <a href={slide.youtubeUrl} target="_blank" rel="noopener noreferrer" class="slide-capsule-btn">
+                  <span class="btn-text">{slide.buttonText || "Mira video"}</span>
+                </a>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    ))}
+      );
+    })}
   </div>
 </section>
 
